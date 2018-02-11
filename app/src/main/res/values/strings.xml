@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Widle</string>
+    <string name="actionbaritem">Se déconnecter</string>
+    <string name="action_settings">Settings</string>
+    <string name="drawer_open">Ouvrir le menu</string>
+    <string name="drawer_close">Fermer le menu</string>
+    
+    <string-array name="spinner">
+        <item>Salle</item>
+        <item>Marteau-piqueur</item>
+        <item>Caméra</item>
+    </string-array>
+</resources>

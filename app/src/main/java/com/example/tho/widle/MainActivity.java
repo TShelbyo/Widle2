@@ -1,6 +1,7 @@
 package com.example.tho.widle;
 
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,10 +17,13 @@ import android.widget.Spinner;
 
 public class MainActivity extends AppCompatActivity {
     private ListView mDrawerList;
+    private ListView listeBase;
     private DrawerLayout mDrawerLayout;
     private ArrayAdapter<String> mAdapter;
+    private ArrayAdapter<String> mAdapter2;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +34,15 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList = (ListView) findViewById(R.id.myList);
         final Spinner sp=(Spinner) findViewById(R.id.spinner);
         final Button b=(Button) findViewById(R.id.button1);
-
+        listeBase =(ListView) findViewById(R.id.myList2);
+        addItems2();
         ArrayAdapter<String> monAdapteur= new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.spinner));
         monAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(monAdapteur);
 
 
         addItems();
+
         setupDrawer();
     }
 
@@ -56,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
         String[] Array = { "Ajouter ressource", "Réserver", "Mes réservations"};
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Array);
         mDrawerList.setAdapter(mAdapter);
+    }
+
+    private void addItems2() {
+        String[] Array = { "Salle 2127", "Salle 2237", "Salle 2235"};
+        mAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Array);
+        listeBase.setAdapter(mAdapter2);
+        //listeBase.getChildAt(1).setBackgroundColor(Color.parseColor("#FF4081"));
     }
 
 

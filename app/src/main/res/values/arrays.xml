@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="dates_reservation">
+
+        <item>Lundi 5 Mai 2018</item>
+
+        <item>Mardi 6 Mai 2018</item>
+
+        <item>Mercredi 7 Mai 2018</item>
+
+        <item>Jeudi 8 Mai 2018</item>
+
+    </string-array>
+</resources>

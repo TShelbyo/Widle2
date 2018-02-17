@@ -1,5 +1,6 @@
 package com.example.tho.widle;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         monAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(monAdapteur);
 
-        b.setOnClickListener(new View.OnClickListener() {
+        /*b.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -59,9 +61,16 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+        });*/
+
+        listeBase.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this,MainRessource.class);
+                startActivity(intent);
+            }
         });
-
-
         addItems();
 
         setupDrawer();

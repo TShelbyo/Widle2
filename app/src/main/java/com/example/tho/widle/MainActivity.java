@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private String mActivityTitle;
     private TextView t1;
     private String[] ArrayA = {"Salle 2127", "Salle 2237", "Salle 2235"};
+    private int[] Image={R.drawable.rondorange,R.drawable.rondrouge,R.drawable.rondvert};
     String[] Array2 ={"Disponible","Non disponible","Bientot indiponible"};
 
     @Override
@@ -160,23 +163,26 @@ public class MainActivity extends AppCompatActivity {
             //setContentView(R.layout.list);
             View view=getLayoutInflater().inflate(R.layout.list,null);
             t1=(TextView) view.findViewById(R.id.textLibelleSalle);
+            ImageView i=(ImageView) view.findViewById(R.id.imageView);
+            i.setImageResource(Image[position]);
             t1.setText(ArrayA[position]);
+            view.setBackgroundColor(Color.parseColor("#FFFFFF"));
             if(position == 0)
             {
                 // Set a background color for ListView regular row/item
-                view.setBackgroundColor(Color.parseColor("#00FF00"));
-                t1.setTextColor(Color.parseColor("#FFFFFF"));
+                t1.setTextColor(Color.parseColor("#ED0000"));
+                i.setImageResource(Image[1]);
             }
             else if(position ==1)
             {
                 // Set the background color for alternate row/item
-                view.setBackgroundColor(Color.parseColor("#FF0921"));
-                t1.setTextColor(Color.parseColor("#FFFFFF"));
+                t1.setTextColor(Color.parseColor("#7FDD4C"));
+                i.setImageResource(Image[2]);
             }
 
             else {
-                view.setBackgroundColor(Color.parseColor("#ED7F10"));
-                t1.setTextColor(Color.parseColor("#FFFFFF"));
+                t1.setTextColor(Color.parseColor("#ED7F10"));
+                i.setImageResource(Image[0]);
             }
 
             return view;

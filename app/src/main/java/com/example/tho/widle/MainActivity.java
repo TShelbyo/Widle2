@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import static android.widget.AdapterView.*;
+
 
 public class MainActivity extends AppCompatActivity {
     private ListView mDrawerList;
@@ -32,23 +36,30 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
     private TextView t1;
-    private String[] ArrayA = {"Salle 2127", "Salle 2237", "Salle 2235"};
+    //private String[] ArrayA; = {"Salle 2127", "Salle 2237", "Salle 2235"};
+    private String[] ArrayM = {"M98","M65","M67"};
+    private String[] ArrayC = {"C85","C23"};
     private int[] Image={R.drawable.rondorange,R.drawable.rondrouge,R.drawable.rondvert};
+    private int spPosition;
+    private CustomListView customListView;
     String[] Array2 ={"Disponible","Non disponible","Bientot indiponible"};
-
+    Salle s1=new Salle("Salle 2127");
+    Salle s2=new Salle("Salle 2237");
+    Salle s3=new Salle("Salle 2235");
+    String[] ArrayA={s1.getLibelle(),s2.getLibelle(),s3.getLibelle()};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mDrawerLayout = (DrawerLayout)findViewById(R.id.mydrawer);
         mActivityTitle = getTitle().toString();
         mDrawerList = (ListView) findViewById(R.id.myList);
+
+
         final Spinner sp=(Spinner) findViewById(R.id.spinner);
         final Button b=(Button) findViewById(R.id.button1);
-
         listeBase =(ListView) findViewById(R.id.myList2);
-        CustomListView customListView=new CustomListView();
+        customListView=new CustomListView();
 
         //mAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ArrayA);
         listeBase.setAdapter(customListView);
@@ -56,10 +67,24 @@ public class MainActivity extends AppCompatActivity {
         //addItems2();
          ArrayAdapter<String> monAdapteur= new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.spinner));
          monAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp.setAdapter(monAdapteur);
+         sp.setAdapter(monAdapteur);
+
+        sp.setOnItemSelectedListener(new OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    customListView=new CustomListView(i);
+                    listeBase.setAdapter(customListView);
 
 
-        listeBase.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            }
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                return;
+            }
+        });
+
+
+        listeBase.setOnItemClickListener(new OnItemClickListener() {
             @Override
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -67,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-       // addItems();
+        addItems();
 
         setupDrawer();
     }
@@ -90,18 +115,9 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setAdapter(mAdapter);
     }
 
-    /*private void addItems2() {
-        String[] Array = { "Salle 2127", "Salle 2237", "Salle 2235"};
-        String[] Array2 ={"Disponible","Non disponible","Bientot indiponible"};
-        //mAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Array);
-        listeBase.setAdapter(customListView);
-        //listeBase.getChildAt(1).setBackgroundColor(Color.parseColor("#FF4081"));
-    }*/
-
 
     private void setupDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
-
 
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -142,10 +158,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     class CustomListView extends BaseAdapter {
+        private int pos;
 
+        public CustomListView() {
+            pos=0;
+        }
+        public CustomListView(int o) {
+            pos=o;
+        }
         @Override
         public int getCount() {
+            if(pos==0)
             return ArrayA.length;
+            if(pos==1)
+            return ArrayM.length;
+            else
+            return ArrayC.length;
         }
 
         @Override
@@ -165,7 +193,13 @@ public class MainActivity extends AppCompatActivity {
             t1=(TextView) view.findViewById(R.id.textLibelleSalle);
             ImageView i=(ImageView) view.findViewById(R.id.imageView);
             i.setImageResource(Image[position]);
+            if(pos==0)
             t1.setText(ArrayA[position]);
+            if(pos==1)
+                t1.setText(ArrayM[position]);
+            if(pos==2)
+                t1.setText(ArrayC[position]);
+
             view.setBackgroundColor(Color.parseColor("#FFFFFF"));
             if(position == 0)
             {

@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainRessource" />
-        <activity android:name=".AjoutRessource"></activity>
+        <activity android:name=".AjoutRessource" />
+        <activity android:name=".Filtre"></activity>
     </application>
 
 </manifest>

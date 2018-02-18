@@ -1,16 +1,12 @@
 package com.example.tho.widle;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
     private TextView t1;
+    private Button btn_filtre;
     //private String[] ArrayA; = {"Salle 2127", "Salle 2237", "Salle 2235"};
     private String[] ArrayM = {"M98","M65","M67"};
     private String[] ArrayC = {"C85","C23"};
@@ -52,13 +49,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btn_filtre = findViewById(R.id.btn_filtre);
+        btn_filtre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent page_filtre = new Intent(MainActivity.this,Filtre.class);
+                startActivity(page_filtre);
+            }
+        });
+
         mDrawerLayout = (DrawerLayout)findViewById(R.id.mydrawer);
         mActivityTitle = getTitle().toString();
         mDrawerList = (ListView) findViewById(R.id.myList);
 
 
         final Spinner sp=(Spinner) findViewById(R.id.spinner);
-        final Button b=(Button) findViewById(R.id.button1);
+        final Button b=(Button) findViewById(R.id.btn_filtre);
         listeBase =(ListView) findViewById(R.id.myList2);
         customListView=new CustomListView();
 
@@ -101,9 +108,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
         addItems();
 
         setupDrawer();
+
+
     }
 
     @Override

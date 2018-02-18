@@ -36,14 +36,17 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
     private TextView t1;
-    private String[] ArrayA = {"Salle 2127", "Salle 2237", "Salle 2235"};
+    //private String[] ArrayA; = {"Salle 2127", "Salle 2237", "Salle 2235"};
     private String[] ArrayM = {"M98","M65","M67"};
     private String[] ArrayC = {"C85","C23"};
     private int[] Image={R.drawable.rondorange,R.drawable.rondrouge,R.drawable.rondvert};
     private int spPosition;
     private CustomListView customListView;
     String[] Array2 ={"Disponible","Non disponible","Bientot indiponible"};
-
+    Salle s1=new Salle("Salle 2127");
+    Salle s2=new Salle("Salle 2237");
+    Salle s3=new Salle("Salle 2235");
+    String[] ArrayA={s1.getLibelle(),s2.getLibelle(),s3.getLibelle()};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout)findViewById(R.id.mydrawer);
         mActivityTitle = getTitle().toString();
         mDrawerList = (ListView) findViewById(R.id.myList);
+
+
         final Spinner sp=(Spinner) findViewById(R.id.spinner);
         final Button b=(Button) findViewById(R.id.button1);
         listeBase =(ListView) findViewById(R.id.myList2);
@@ -109,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Array);
         mDrawerList.setAdapter(mAdapter);
     }
-    
+
 
     private void setupDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {

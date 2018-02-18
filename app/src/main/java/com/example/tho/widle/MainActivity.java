@@ -1,6 +1,5 @@
 package com.example.tho.widle;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -48,20 +47,20 @@ public class MainActivity extends AppCompatActivity {
         mAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ArrayA);
         listeBase.setAdapter(mAdapter2);
         //addItems2();
-        ArrayAdapter<String> monAdapteur= new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.spinner));
+        ArrayAdapter<String> monAdapteur= new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.ressource_types));
         monAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(monAdapteur);
 
-        /*b.setOnClickListener(new View.OnClickListener() {
+        b.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,MainRessource.class);
+                Intent intent = new Intent(MainActivity.this,AjoutRessource.class);
                 startActivity(intent);
 
             }
 
-        });*/
+        });
 
         listeBase.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     Salle s2=new Salle("Salle 2237");
     Salle s3=new Salle("Salle 2235");
     String[] ArrayA={s1.getLibelle(),s2.getLibelle(),s3.getLibelle()};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mDrawerList.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent2 = new Intent(MainActivity.this,AjoutRessource.class);
+                startActivity(intent2);
+            }
+        });
 
         listeBase.setOnItemClickListener(new OnItemClickListener() {
             @Override

@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Widle.iml" filepath="$PROJECT_DIR$/Widle.iml" />
       <module fileurl="file://C:\Users\jerem\Google Drive\Cours\appli mobiles\Wydle\Widle.iml" filepath="C:\Users\jerem\Google Drive\Cours\appli mobiles\Wydle\Widle.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/Wydle.iml" filepath="$PROJECT_DIR$/.idea/Wydle.iml" />
+      <module fileurl="file://C:\Users\Public\Widle\.idea\Wydle.iml" filepath="C:\Users\Public\Widle\.idea\Wydle.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

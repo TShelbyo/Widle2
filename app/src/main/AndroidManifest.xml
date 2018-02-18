@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainRessource"></activity>
+        <activity android:name=".MainRessource" />
+        <activity android:name=".AjoutRessource"></activity>
     </application>
 
 </manifest>

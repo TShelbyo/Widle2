@@ -1,7 +1,10 @@
 package com.example.tho.widle;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,13 +31,16 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> mAdapter2;
     private ActionBarDrawerToggle mDrawerToggle;
     private String mActivityTitle;
-    String[] ArrayA = { "Salle 2127", "Salle 2237", "Salle 2235"};
+    private TextView t1;
+    private String[] ArrayA = {"Salle 2127", "Salle 2237", "Salle 2235"};
+    private int[] Image={R.drawable.rondorange,R.drawable.rondrouge,R.drawable.rondvert};
     String[] Array2 ={"Disponible","Non disponible","Bientot indiponible"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mDrawerLayout = (DrawerLayout)findViewById(R.id.mydrawer);
         mActivityTitle = getTitle().toString();
         mDrawerList = (ListView) findViewById(R.id.myList);
@@ -41,26 +48,16 @@ public class MainActivity extends AppCompatActivity {
         final Button b=(Button) findViewById(R.id.button1);
 
         listeBase =(ListView) findViewById(R.id.myList2);
+        CustomListView customListView=new CustomListView();
 
-        //CustomListView customListView=new CustomListView();
+        //mAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ArrayA);
+        listeBase.setAdapter(customListView);
 
-        mAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ArrayA);
-        listeBase.setAdapter(mAdapter2);
         //addItems2();
-        ArrayAdapter<String> monAdapteur= new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.ressource_types));
-        monAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+         ArrayAdapter<String> monAdapteur= new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.spinner));
+         monAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp.setAdapter(monAdapteur);
 
-        b.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,AjoutRessource.class);
-                startActivity(intent);
-
-            }
-
-        });
 
         listeBase.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -70,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        addItems();
+       // addItems();
 
         setupDrawer();
     }
@@ -105,13 +102,13 @@ public class MainActivity extends AppCompatActivity {
     private void setupDrawer() {
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
 
-            /** ouvert */
+
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 getSupportActionBar().setTitle("Categorie");
                 invalidateOptionsMenu();
             }
-            /** fermer */
+
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 getSupportActionBar().setTitle(mActivityTitle);
@@ -148,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 0;
+            return ArrayA.length;
         }
 
         @Override
@@ -163,11 +160,30 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            //setContentView(R.layout.list);
             View view=getLayoutInflater().inflate(R.layout.list,null);
-            TextView t1=(TextView) findViewById(R.id.textRessource);
-            TextView t2=(TextView) findViewById(R.id.textViewRessource2);
+            t1=(TextView) view.findViewById(R.id.textLibelleSalle);
+            ImageView i=(ImageView) view.findViewById(R.id.imageView);
+            i.setImageResource(Image[position]);
             t1.setText(ArrayA[position]);
-            t2.setText(Array2[position]);
+            view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            if(position == 0)
+            {
+                // Set a background color for ListView regular row/item
+                t1.setTextColor(Color.parseColor("#ED0000"));
+                i.setImageResource(Image[1]);
+            }
+            else if(position ==1)
+            {
+                // Set the background color for alternate row/item
+                t1.setTextColor(Color.parseColor("#7FDD4C"));
+                i.setImageResource(Image[2]);
+            }
+
+            else {
+                t1.setTextColor(Color.parseColor("#ED7F10"));
+                i.setImageResource(Image[0]);
+            }
 
             return view;
         }

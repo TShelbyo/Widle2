@@ -113,8 +113,6 @@ public class MainActivity extends AppCompatActivity {
         addItems();
 
         setupDrawer();
-
-
     }
 
     @Override
